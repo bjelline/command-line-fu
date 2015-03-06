@@ -8,6 +8,8 @@
 where simple means: providing well thought out functionality,
 implemented to perfection (see [grep algorigthm and implementation](http://lists.freebsd.org/pipermail/freebsd-current/2010-August/019310.html))
 
+---
+
 ## before we do anything
 
 * use the up-arrow (and down-arrow) to go back to previouse commands
@@ -15,6 +17,10 @@ implemented to perfection (see [grep algorigthm and implementation](http://lists
 * use CTRL-A to move your cursor to the beginning of the line
 * use CTRL-E to move your cursor to the end of the line
 * use CTRL-K to delete from the cursor to the end of the line
+
+---
+
+---
 
 ## What kind of file is that?
 
@@ -59,6 +65,8 @@ How many lines are there?
 
 See also man wc
 
+---
+
 ## rename and move stuff around
 
 now we know that 'parole' is a csv file
@@ -67,6 +75,8 @@ let's rename it:
     $ mv parole parole.csv
 
 See also man mv
+
+---
 
 ## find certain lines, get rid of certain files
 
@@ -94,15 +104,21 @@ to build more comlex search, with search patterns, use egrep
 
 See also man grep
 
+---
+
 ## sorting
 
     $ sort names.txt
 
 
+---
+
 ## count, top-n
 
     $ sort names.txt | uniq -c | sort -r
 
+
+---
 
 ## redirection 
 
@@ -123,6 +139,8 @@ to a "channel" called "standard output" (or STDOUT, stdout in different programm
 the redirection is the general way of sending this channel to a file.
 
 See also man bash, search for REDIRECTION
+
+---
 
 ## pipeline
 
@@ -145,10 +163,14 @@ Using the pipe you can create complex programs without writing any permanent cod
 
 When using longer pipes, always put "| less" at the end to take a peek.
 
+---
+
 ## cutting columns from files
 
 cut, paste
 
+
+---
 
 ## handling csv files
 
@@ -165,10 +187,14 @@ Now we can use the power of pipelines to learn more about the single factors:
 
 
 
+---
+
 ## compressed files
 
 search inside *.zip or *.gz files with zgrep, zegrep
 
+
+---
 
 ## using csvcut and other stuff
 
