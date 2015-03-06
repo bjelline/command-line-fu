@@ -2,6 +2,10 @@ class: center, middle
 
 # Command-Line-Fu
 
+An introduction to the UNIX command line for munging data.
+
+(Source on [github](https://github.com/bjelline/command-line-fu), made with [remark](https://github.com/gnab/remark))
+
 ---
 
 ## "UNIX philosophy"

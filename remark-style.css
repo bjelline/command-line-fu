@@ -1,5 +1,6 @@
       body {
         font-family: 'Droid Serif';
+        line-height: 1.5;
       }
       h1, h2, h3 {
         font-family: 'Yanone Kaffeesatz';
@@ -13,7 +14,7 @@
         position: absolute;
         bottom: 3em;
       }
-      li p { line-height: 1.25em; }
+      li { margin: 0.75em 0; }
       .red { color: #fa0000; }
       .large { font-size: 2em; }
       a, a > code {
@@ -26,7 +27,7 @@
         background: #e7e8e2;
         border-radius: 5px;
       }
-      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .remark-code, .remark-inline-code { font-family: 'Droid Sans Mono'; }
       .remark-code-line-highlighted     { background-color: #373832; }
       .pull-left {
         float: left;
