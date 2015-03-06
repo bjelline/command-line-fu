@@ -22,13 +22,25 @@ implemented to perfection (see [grep algorigthm and implementation](http://lists
 
 ---
 
-## before we do anything
+## Command Line Keys
 
 * use the up-arrow (and down-arrow) to go back to previouse commands
 * use the tabulator key for file name completion:  type just the first letter of a filename, then try tab
 * use CTRL-A to move your cursor to the beginning of the line
 * use CTRL-E to move your cursor to the end of the line
 * use CTRL-K to delete from the cursor to the end of the line
+
+---
+
+## Command Line History
+
+* !!  repeats the last command
+* !$  repeat the last word of the last command
+
+```bash
+$ mkdir this_long_directory_name
+$ cd !$
+```
 
 ---
 
@@ -50,18 +62,22 @@ $ ls -lh parole
 you don't know what might be in the file?
 guess the file type:
 
-    $ file parole 
-    parole: ASCII text
+```bash
+$ file parole 
+parole: ASCII text
+```
 
 if it's text, we can take a peek with less.
 
-    $ less parole
+```bash
+$ less parole
+```
 
 ---
 
-## less
+## more or less
 
-use key commands in less:
+use key commands in less (in many contexts)
 
   * q to quit
   * SPACE to page one down
@@ -74,15 +90,15 @@ use key commands in less:
     * n to jump to the next occurance
     * b to jump back to the previous occurance
 
-less is used in many other command line tools, e.g. in man.
-it pays to learn these key commands!
 
 ---
 
 ## How many lines are there?
 
-    $ wc -l parole
-    24291 parole
+```bash
+$ wc -l parole
+24291 parole
+```
 
 See also man wc
 
@@ -93,7 +109,9 @@ See also man wc
 now we know that 'parole' is a csv file
 let's rename it:
 
-    $ mv parole parole.csv
+```bash
+$ mv parole parole.csv
+```
 
 See also man mv
 
@@ -106,7 +124,9 @@ find certain lines, get rid of certain files
 grep will look for a string in each line, and print
 the line if the string is contained.  
 
-   $ grep TRAMA parole.csv
+```bash
+$ grep TRAMA parole.csv
+```
 
 ---
 
@@ -114,11 +134,15 @@ the line if the string is contained.
 
 If there is a space in your search string you must quote it:
 
-   $ grep 'JAMES, MARK' parole.csv
+```bash
+$ grep 'JAMES, MARK' parole.csv
+```
 
 grep is case sensitive, use -i to make it case insensitive:
 
-   $ grep -i trama parole.csv
+```bash
+$ grep -i trama parole.csv
+```
 
 ---
 
@@ -127,7 +151,9 @@ grep is case sensitive, use -i to make it case insensitive:
 the option v turns grep around: all lines are printed, except those
 matching the pattern.  this way you can get rid of certain files
 
-   $ grep -v ....
+```bash
+$ grep -v ....
+```
 
 ---
 
@@ -135,30 +161,157 @@ matching the pattern.  this way you can get rid of certain files
 
 to build more complex search, with search patterns, use egrep
 
-   $ egrep 'TRAMA|TENNEY' parole.csv
+```bash
+$ egrep 'TRAMA|TENNEY' parole.csv
+```
 
 ---
 
 ## sorting
 
-    $ sort names.txt
+unsorted stuff
+
+```bash
+$ cat names.txt
+DUQUIN, JON
+MCALPINE, ERIC M
+MCALPINE, ERIC M
+MCALPINE, ERIC M
+BROWN, STEPHANIE
+BROWN, WILLIAM
+BOATWRIGHT, MAURICE
+PAYNE, RAYMOND
+DUQUIN, JON
+BROWN, WILLIAM
+MCKINNEY, ROSS B
+MORALES, VICTOR
+DUQUIN, JON
+MCALPINE, ERIC M
+BYNUM, STEVEN
+```
 
 
 ---
 
-## count, top-n
+## sorting
 
-    $ sort names.txt | uniq -c | sort -r
+sorting 
+
+```bash
+$ sort names.txt
+BOATWRIGHT, MAURICE
+BROWN, STEPHANIE
+BROWN, WILLIAM
+BROWN, WILLIAM
+BYNUM, STEVEN
+DUQUIN, JON
+DUQUIN, JON
+DUQUIN, JON
+MCALPINE, ERIC M
+MCALPINE, ERIC M
+MCALPINE, ERIC M
+MCALPINE, ERIC M
+MCKINNEY, ROSS B
+MORALES, VICTOR
+PAYNE, RAYMOND
+```
+
+
+---
+
+## sort and make uniq
+
+```bash
+$ sort names.txt | uniq 
+BOATWRIGHT, MAURICE
+BROWN, STEPHANIE
+BROWN, WILLIAM
+BYNUM, STEVEN
+DUQUIN, JON
+MCALPINE, ERIC M
+MCKINNEY, ROSS B
+MORALES, VICTOR
+PAYNE, RAYMOND
+```
+
+
+---
+
+## sort and count
+
+```bash
+$ sort names.txt | uniq -c
+      1 BOATWRIGHT, MAURICE
+      1 BROWN, STEPHANIE
+      2 BROWN, WILLIAM
+      1 BYNUM, STEVEN
+      3 DUQUIN, JON
+      4 MCALPINE, ERIC M
+      1 MCKINNEY, ROSS B
+      1 MORALES, VICTOR
+      1 PAYNE, RAYMOND
+```
+
+
+---
+
+## sort and count, sort by number
+
+```bash
+$ sort names.txt | uniq -c | sort -n
+      1 BOATWRIGHT, MAURICE
+      1 BROWN, STEPHANIE
+      1 BYNUM, STEVEN
+      1 MCKINNEY, ROSS B
+      1 MORALES, VICTOR
+      1 PAYNE, RAYMOND
+      2 BROWN, WILLIAM
+      3 DUQUIN, JON
+      4 MCALPINE, ERIC M
+```
+
+---
+
+
+## sort and count, sort by number, reversed
+
+```bash
+$ sort names.txt | uniq -c | sort -rn
+      4 MCALPINE, ERIC M
+      3 DUQUIN, JON
+      2 BROWN, WILLIAM
+      1 PAYNE, RAYMOND
+      1 MORALES, VICTOR
+      1 MCKINNEY, ROSS B
+      1 BYNUM, STEVEN
+      1 BROWN, STEPHANIE
+      1 BOATWRIGHT, MAURICE
+```
+
+
+---
+
+## top 3 by number of occurences
+
+```bash
+$ sort names.txt | uniq -c | sort -rn | head -3
+      4 MCALPINE, ERIC M
+      3 DUQUIN, JON
+      2 BROWN, WILLIAM
+```
 
 
 ---
 
 ## redirection 
 
-Here we use the greater than sign for output-redirection to a file
+Here we use the greater than sign for output-redirection to a file.
+
 This will overwrite the file if it already exists, so be careful when to use it!
 
-    $ grep DENIED parole.csv > parole-denied.csv
+```bash
+$ grep DENIED parole.csv > parole-denied.csv
+```
 
 ---
 
@@ -166,10 +319,16 @@ This will overwrite the file if it already exists, so be careful when to use it!
 
 if you want to add to an existing file use double greater than signs:
 
-    $ grep GRANTED parole.csv  > parole-granted.csv
-    $ grep PAROLED parole.csv >> parole-granted.csv
+```bash
+$ grep GRANTED parole.csv  > parole-granted.csv
+$ grep PAROLED parole.csv >> parole-granted.csv
+```
 
-This way you can get any program to writ to a file.
+---
+
+## redirection 
+
+Using redirection you can get any program to write to a file.
 
 How does this work?  The UNIX command line tools send their output
 to a "channel" called "standard output" (or STDOUT, stdout in different programming languages).
@@ -184,18 +343,22 @@ See also man bash, search for REDIRECTION
 How many people were denied parole?  we just
 need to count the lines:
 
-    $ grep DENIED parole.csv > parole-denied.csv
-    $ wc -l parole-denied.csv
+```bash
+$ grep DENIED parole.csv > parole-denied.csv
+$ wc -l parole-denied.csv
+```
 
 ---
 
-## redirection 
+## pipeline
 
 But there is no need to create the file at all: we can creat a pipeline
 with the vertical bar symbol. The pipeline connects the output
 channel of grep to the input channel of wc:
 
-    $ grep DENIED parole.csv | wc -l 
+```bash
+$ grep DENIED parole.csv | wc -l 
+```
 
 The vertical bar is often called "pipe", so you would read
 this command as: grep denied parole.csv pipe wordcount minus L
@@ -204,9 +367,17 @@ Using the pipe you can create complex programs without writing any permanent cod
 
 ---
 
-## redirection 
+## pipeline
 
-When using longer pipes, always put "| less" at the end to take a peek.
+When building pipes and working with large data sets, always put "| less" at the end to take a peek.
+
+```bash
+$ sort names.txt | less
+$ sort names.txt | uniq -c | less
+$ sort names.txt | uniq -c | sort -n | less
+$ sort names.txt | uniq -c | sort -rn | less
+$ sort names.txt | uniq -c | sort -rn | head -30 | less
+```
 
 ---
 
@@ -223,45 +394,265 @@ There are the commands 'cut' and 'paste' that you might want to
 use to handle comma-separated-values files.  But beware: as soon as
 you have commas inside one of the columns cut will not work for you!
 
-Here the csv-tools come in: csvcut knows about strings and escaping
-in csv and will cout out the correct columns:
+Here [csvkit](https://github.com/onyxfish/csvkit) comes in: 
+csvkit knows about strings and escaping
+in csv and will cut out the correct columns:
 
-    $ csvcut -c1,2 parole.csv
+```bash
+$ csvcut -c1,2 parole.csv
+```
 
-Now we can use the power of pipelines to learn more about the single factors:
+Now we can use the power of pipelines to learn more about a csv file
 
+```bash
+$ csvcut -c1,2 parole.csv | sort .....
+```
+
+---
+
+## handling json files
+
+use [jq](https://stedolan.github.io/jq/) for querying json files:
+
+```bash
+$ less example.json
+{
+    "status": "past", 
+    "rating": {
+        "count": 1, 
+        "average": 5
+    }, 
+    "utc_offset": -18000000, 
+    "group": {
+        "name": "SOME CLUB", 
+        "join_mode": "approval", 
+        "who": "Members", 
+        "id": 12345
+    }, 
+    "description": "<p>we haven an <b>OPEN HOUSE</b>", 
+    "created": 1383331008000, 
+    "updated": 1383930450000, 
+```
+
+---
+## handling json files
+
+use [jq](https://stedolan.github.io/jq/) for querying json files:
+
+```bash
+$ cat example.json | jq '.'
+{
+    "status": "past", 
+    "rating": {
+        "count": 1, 
+        "average": 5
+    }, 
+    "utc_offset": -18000000, 
+    "group": {
+        "name": "SOME CLUB", 
+        "join_mode": "approval", 
+        "who": "Members", 
+        "id": 12345
+    }, 
+    "description": "<p>we haven an <b>OPEN HOUSE</b>", 
+    "created": 1383331008000, 
+    "updated": 1383930450000, 
+```
+
+---
+## handling json files
+
+use [jq](https://stedolan.github.io/jq/) for querying json files:
+
+```bash
+$ cat example.json | jq '{id: .id, rating: .rating.average}'
+{
+  "id": "148644612",
+  "rating": 5
+}
+```
+
+---
+## handling json files with array
+
+use [jq](https://stedolan.github.io/jq/) for querying json files:
+
+```bash
+$ cat array.json
+[
+    {
+        "status": "past", 
+        "rating": {
+            "count": 1, 
+            "average": 5
+        }, 
+        "yes_rsvp_count": 8, 
+        "headcount": 0, 
+        "id": "148644612"
+    }, 
+    {
+        "status": "past", 
+        "rating": {
+            "count": 0, 
+            "average": 0
+        }, 
+```
+
+---
+## handling json files with array
+
+use [jq](https://stedolan.github.io/jq/) for querying json files:
+
+```bash
+$ cat array.json | jq '.[]|{id: .id, rating: .rating.average}' | less
+{
+  "id": "148644612",
+  "rating": 5
+}
+{
+  "id": "150931712",
+  "rating": 4.75
+}
+```
+
+---
+
+
+## compressed files: zip
+
+see list of file with unzip -v before uncompressing
+
+```bash
+$ unzip -v groups_new.zip
+Archive:  groups_new.zip
+ Length   Method    Size  Cmpr    Date    Time   CRC-32   Name
+--------  ------  ------- ---- ---------- ----- --------  ----
+       0  Stored        0   0% 10-24-2014 12:50 00000000  groups_new/
+  912939  Defl:N   151623  83% 10-24-2014 10:34 d331e014  groups_new/category_1.json
+ 1308266  Defl:N   226343  83% 10-24-2014 10:44 51ae53a1  groups_new/category_10.json
+  667660  Defl:N   112417  83% 10-24-2014 10:44 c3cbb3d4  groups_new/category_11.json
+  596065  Defl:N    94715  84% 10-24-2014 10:44 9feb58bf  groups_new/category_12.json
+...
+  336000  Defl:N    51356  85% 10-24-2014 10:44 0b4d4b64  groups_new/category_8.json
+ 1545754  Defl:N   247832  84% 10-24-2014 10:44 c95bd009  groups_new/category_9.json
+--------          -------  ---                            -------
+40093888          6725152  83%                            36 files
+```
+
+---
+
+
+## compressed files: zip
+
+see content of files with unzip -c before uncompressing
+
+```bash
+$ unzip -c groups_new.zip | less
+Archive:  groups_new.zip
+ extracting: groups_new/             
+
+  inflating: groups_new/category_1.json  
+[
+    {
+        "category": {
+            "shortname": "arts-culture", 
+            "name": "fine arts/culture"
+        }, 
+        "city": "New York", 
+        "rating": 4.52, 
+        "description": "<p>discussing books chosen by the members of our group.</p>", 
+        "join_mode": "approval", 
+        "country": "US", 
+        "who": "Book Lovers", 
+```
+
+---
+
+## compressed files: zip
+
+uncompress
+
+```bash
+$ unzip groups_new.zip 
+
+Archive:  groups_new.zip
+   creating: groups_new/
+  inflating: groups_new/category_1.json  
+  inflating: groups_new/category_10.json  
+  inflating: groups_new/category_11.json  
+  inflating: groups_new/category_12.json  
+  inflating: groups_new/category_13.json  
+  inflating: groups_new/category_14.json  
+  inflating: groups_new/category_15.json  
+
+ extracting: groups_new/category_7.json  
+  inflating: groups_new/category_8.json  
+  inflating: groups_new/category_9.json 
+---
+
+## compressed files: gz
+
+a .gz file contains one compressed file only.
+
+look at the contents of that file
+
+```bash
+$ zcat some_log.1.gz
+```
+
+---
+
+## compressed files: tgz
+
+tgz is short for .tar.gz: the tar file contains sequence
+of several files (no compression), the .gz does the compression.
+
+look at the list of files:
+
+```bash
+$ tar tvfz data.tgz
+```
+
+uncompress
+
+```bash
+$ tar xvfz data.tgz
+```
+
+---
+
+# The end
+(there are a few more slides with leftovers)
 
 
 ---
 
-## compressed files
+## some real world pipes
 
-search inside *.zip or *.gz files with zgrep, zegrep
+```bash
+$  csvcut -c3 parole.csv |cut -c1-2| 
 
+$ csvcut -c3 parole.csv |cut -c1-2| awk '{ if (int($0) > 20) print "19$0"; else print "20$0";'
 
----
+$ echo "YEAR INCARCERATION" > year_of_incarceration.txt
 
-## using csvcut and other stuff
+$ csvcut -c3 parole.csv |cut -c1-2| grep -v DI|  perl -n -e 'if($_>16) { print "19$_" } else { print "20$_" }' >> year_of_incarceration.txt
 
-    $  csvcut -c3 parole.csv |cut -c1-2| 
+$ csvcut -c5 parole.csv | cut -d\/ -f 3 | sed -e 's/DATE/YEAR/' |head -10 > birth_year.txt
 
-    $ csvcut -c3 parole.csv |cut -c1-2| awk '{ if (int($0) > 20) print "19$0"; else print "20$0";'
-
-    $ echo "YEAR INCARCERATION" > year_of_incarceration.txt
-    $ csvcut -c3 parole.csv |cut -c1-2| grep -v DI|  perl -n -e 'if($_>16) { print "19$_" } else { print "20$_" }' >> year_of_incarceration.txt
-
-    csvcut -c5 parole.csv | cut -d\/ -f 3 | sed -e 's/DATE/YEAR/' |head -10 > birth_year.txt
-
-    csvcut -c11,12 parole-3.csv | perl -n -e '($in,$birth) = split /,/; if($.==1){print "AGE AT INCARCERATION\n"} else { print $in-$birth, "\n"}' > age_at_incarceration.txt
+$ csvcut -c11,12 parole-3.csv | perl -n -e '($in,$birth) = split /,/; if($.==1){print "AGE AT INCARCERATION\n"} else { print $in-$birth, "\n"}' > age_at_incarceration.txt
+```
 
 file:///Users/bjelline/Dropbox/ScrapBook/data/20130124145714/index.html
 
-    tr -cs A-Za-z '\n' |
-    tr A-Z a-z |
-    sort |
-    uniq -c |
-    sort -rn |
-    sed ${1}q
+```bash
+tr -cs A-Za-z '\n' |
+tr A-Z a-z |
+sort |
+uniq -c |
+sort -rn |
+sed ${1}q
+```
 
 McIlroy’s short, impossible-to-misunderstand explanation:
 

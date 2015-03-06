@@ -28,6 +28,7 @@
         border-radius: 5px;
       }
       .remark-code, .remark-inline-code { font-family: 'Droid Sans Mono'; }
+      .smallcode .remark-code, .smallcode .remark-inline-code { font-size: 14px; }
       .remark-code-line-highlighted     { background-color: #373832; }
       .pull-left {
         float: left;
