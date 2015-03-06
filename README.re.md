@@ -1,3 +1,4 @@
+class: center, middle
 
 # Command-Line-Fu
 
