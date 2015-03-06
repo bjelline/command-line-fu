@@ -36,10 +36,12 @@ implemented to perfection (see [grep algorigthm and implementation](http://lists
 
 first, let's look at the size:
 
-    $ ls -l parole 
-    -rw-r----- 1 bjelline admin 2286089 Feb 25 12:13 parole
-    $ ls -lh parole 
-    -rw-r----- 1 bjelline admin 2.2M Feb 25 12:13 parole
+```bash
+$ ls -l parole 
+-rw-r----- 1 bjelline admin 2286089 Feb 25 12:13 parole
+$ ls -lh parole 
+-rw-r----- 1 bjelline admin 2.2M Feb 25 12:13 parole
+```
 
 ---
 
