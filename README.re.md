@@ -646,8 +646,11 @@ $ csvcut -c5 parole.csv | cut -d\/ -f 3 | sed -e 's/DATE/YEAR/' |head -10 > birt
 
 $ csvcut -c11,12 parole-3.csv | perl -n -e '($in,$birth) = split /,/; if($.==1){print "AGE AT INCARCERATION\n"} else { print $in-$birth, "\n"}' > age_at_incarceration.txt
 ```
+---
 
-file:///Users/bjelline/Dropbox/ScrapBook/data/20130124145714/index.html
+## a famous example
+
+[source](http://www.leancrew.com/all-this/2011/12/more-shell-less-egg/)
 
 ```bash
 tr -cs A-Za-z '\n' |
