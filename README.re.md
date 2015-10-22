@@ -625,9 +625,17 @@ $ tar xvfz data.tgz
 ---
 class: center, middle
 
-# The end
-(there are a few more slides with leftovers)
+# Into the Database
 
+
+---
+## Loading into the Database
+
+* (binary) Database Dump
+* SQL Dump, e.g. pg_dump, pg_restore
+* Load CSV from client, e.g. \COPY
+* Load CSV from server, e.g. COPY
+* Load CSV as foreign table
 
 ---
 
